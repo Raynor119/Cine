@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity
 	public List<funcion> fun = new ArrayList<>();
 	public List<detalles> ll = new ArrayList<>();
 	public List<usuario> usu = new ArrayList<>();
+	public List<silla> sii = new ArrayList<>();
 	public String cedulag="";
 	public String nombreg="";
 	public String telefonog="";
@@ -300,6 +301,17 @@ public class MainActivity extends AppCompatActivity
 											AlertDialog titulo=alertt.create();
 											titulo.setTitle("Datos del Usuario");
 											titulo.show();
+											conexion c=new conexion();
+											peliculag=peli;
+											desci=2;
+											//g.cancel(true);
+
+											MongoDatabase database = c.mongo.getDatabase("cine");
+											final MongoCollection<Document> collection = database.getCollection("usuarios");
+
+											g.cancel(true);
+											gestion g1 = new gestion() ;
+											g1.execute(collection);
 											EditText cedu= vie.findViewById(R.id.cc);
 											EditText nomb= vie.findViewById(R.id.nombre);
 											EditText tele= vie.findViewById(R.id.telefono);
@@ -311,6 +323,9 @@ public class MainActivity extends AppCompatActivity
 													@Override
 													public void onClick(View p1)
 													{
+														
+														
+														
 														AlertDialog.Builder alertt= new AlertDialog.Builder(mParentActivity);
 
 														final View vie = LayoutInflater.from(mParentActivity).inflate(R.layout.sillas, null);
@@ -348,17 +363,22 @@ public class MainActivity extends AppCompatActivity
 														CheckBox A6= vie.findViewById(R.id.A6);
 														CheckBox A7= vie.findViewById(R.id.A7);
 														CheckBox B1= vie.findViewById(R.id.B1);
-														conexion c=new conexion();
-														desci=2;
-														//g.cancel(true);
 														
-														MongoDatabase database = c.mongo.getDatabase("cine");
-														final MongoCollection<Document> collection = database.getCollection("usuarios");
-														
-														g.cancel(true);
-														gestion g1 = new gestion() ;
-														g1.execute(collection);
-														String ns=v[0];
+														for(int i=0;i<sii.size();i++){
+															//Toast.makeText(getApplicationContext(), ""+v[i], Toast.LENGTH_LONG).show();
+															if(sii.get(i).getSilla().equals("A1")){
+																A1.setChecked(true);
+																A1.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("A2")){
+																A2.setChecked(true);
+																A2.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("A3")){
+																A3.setChecked(true);
+																A3.setEnabled(false);
+															}
+														}
 														
 														
 														
@@ -590,25 +610,19 @@ public class MainActivity extends AppCompatActivity
 
 					//System.out.println(mongoCursor.next());  
 				} 
-				int con=0;
-				for(int i=0;i<db.getCollection("cartelera").find().toArray().size();i++){
+				n="";
+				for(int i=0;i<db.getCollection("reserva").find().toArray().size();i++){
 
 					List<BasicDBObject> nnn= (List<BasicDBObject>) db.getCollection("reserva").find().toArray();
 
-					JSONObject json= new JSONObject(nnn.get(i)+"");
-					if(json.getString("pelicula").equals(peliculag)){
-						con++;
+					
+					if((nnn.get(i).get("pelicula")+"").equals(peliculag)){
+						sii.add(new silla(""+nnn.get(i).get("silla")));
 					}
 					
 				}
-				v=new String [con];
 				
-				for(int i=0;i<db.getCollection("usuarios").find().toArray().size();i++){
-					
-					List<BasicDBObject> nnn= (List<BasicDBObject>) db.getCollection("usuarios").find().toArray();
-					//v[i]=""+nnn.get(i).get("cedula");
-					usu.add(new usuario(""+nnn.get(i).get("cedula"),""+nnn.get(i).get("nombre"),""+nnn.get(i).get("telefono"),""+nnn.get(i).get("email")));
-				}
+				
 
 
 			}catch(Exception e){
@@ -617,7 +631,7 @@ public class MainActivity extends AppCompatActivity
 				n=e.getClass().getName() + ": " + e.getMessage()+"";
 			}
 
-			//publishProgress("funciono");
+			//publishProgress(n);
 		}
 		
 

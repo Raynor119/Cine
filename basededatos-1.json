@@ -52,3 +52,13 @@ db.reserva.insert({
 				"sala": "A2"
 				}
 		})
+db.reserva.insert({
+		"cedula": "60300832",
+		"pelicula": "It Capitulo 2",
+		"silla": "A2",
+		"funcion":{
+				"dia": "13/12/2020",
+				"hora": "12:00",
+				"sala": "A2"
+				}
+		})
