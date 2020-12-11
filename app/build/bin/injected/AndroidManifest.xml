@@ -27,6 +27,11 @@
 		android:resizeableActivity="true">
 
 		<activity
+			android:name=".reservas"
+			android:supportsRtl="true"
+			android:theme="@style/AppTheme.NoActionBar"/>
+
+		<activity
 			android:name=".MainActivity"
 			android:supportsRtl="true"
 			android:theme="@style/AppTheme.NoActionBar">

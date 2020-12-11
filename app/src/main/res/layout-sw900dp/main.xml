@@ -43,8 +43,9 @@
 			<TextView
 				style="@style/headerText"
 				android:layout_gravity="center"
+				android:id="@+id/t1"
 				android:layout_marginTop="40dp"
-				android:text="Peliculas"
+				android:text="Cine Calidad"
 				android:layout_marginLeft="240dp"
 				android:textSize="34dp"/>
 

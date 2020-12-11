@@ -23,6 +23,10 @@
         android:resizeableActivity="true"
         android:theme="@style/AppTheme" >
         <activity
+            android:name="com.pixles.cine.reservas"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name="com.pixles.cine.MainActivity"
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar" >

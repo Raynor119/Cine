@@ -46,7 +46,8 @@
 				style="@style/headerText"
 				android:layout_gravity="center"
 				android:layout_marginTop="40dp"
-				android:text="Peliculas"
+				android:id="@+id/t1"
+				android:text="Cine Calidad"
 				android:layout_marginLeft="40dp"
 				android:textSize="30dp"/>
 

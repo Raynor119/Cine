@@ -34,6 +34,7 @@ import android.widget.CheckBox;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RadioGroup;
 import android.widget.CompoundButton;
+import android.content.Intent;
 
 
 public class MainActivity extends AppCompatActivity
@@ -54,7 +55,7 @@ public class MainActivity extends AppCompatActivity
 	public String peliculag="";
 	public String silag="";
 	int desci=0;
-	gestion g ;
+	gestion g;
 	public String [] v;
 	public String [] sil;
 	TextView nn;
@@ -63,7 +64,7 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-		//nn=(TextView)findViewById(R.id.mainTextView);
+		nn=(TextView)findViewById(R.id.t1);
 		recyclerView1 =(RecyclerView) findViewById(R.id.listru);
 		assert recyclerView1 != null;
 		//reclicle();
@@ -75,7 +76,18 @@ public class MainActivity extends AppCompatActivity
 		
 		g = new gestion() ;
 		g.execute(collection);
-		
+		nn.setOnClickListener(new OnClickListener(){
+
+				@Override
+				public void onClick(View p1)
+				{
+					Intent intenet=new Intent(MainActivity.this,reservas.class);
+					startActivity(intenet);
+					
+				}
+				
+			
+		});
 		
 		
 		
@@ -207,7 +219,8 @@ public class MainActivity extends AppCompatActivity
 																				g.cancel(true);
 																				gestion g4 = new gestion() ;
 																				g4.execute(collection);
-
+																				Toast.makeText(getApplicationContext(), "La reserva se a Guardado", Toast.LENGTH_LONG).show();
+																				
 
 
 
@@ -226,13 +239,24 @@ public class MainActivity extends AppCompatActivity
 
 
 																	AlertDialog titulo=alertt.create();
-																	titulo.setTitle("Datos del Usuario2");
+																	titulo.setTitle("Datos del Usuario");
 																	titulo.show();
 																	EditText cedu1= vie.findViewById(R.id.cc);
 																	EditText nomb1= vie.findViewById(R.id.nombre);
 																	EditText tele1= vie.findViewById(R.id.telefono);
 																	EditText email1=vie.findViewById(R.id.email);
 																	final EditText sill= vie.findViewById(R.id.silla);
+																	conexion c1=new conexion();
+																	peliculag=peli;
+																	desci=2;
+																	//g.cancel(true);
+
+																	MongoDatabase database1 = c.mongo.getDatabase("cine");
+																	final MongoCollection<Document> collection1 = database1.getCollection("usuarios");
+
+																	g.cancel(true);
+																	gestion g2 = new gestion() ;
+																	g2.execute(collection1);
 																	Button b1= vie.findViewById(R.id.b1);
 
 																	b1.setOnClickListener(new OnClickListener(){
@@ -249,7 +273,7 @@ public class MainActivity extends AppCompatActivity
 
 																				alertt.setView(vie)
 																					.setCancelable(false);
-																				alertt.setNeutralButton("Salir1", new DialogInterface.OnClickListener() {
+																				alertt.setNeutralButton("Salir", new DialogInterface.OnClickListener() {
 																						@Override
 																						public void onClick(DialogInterface dialogInterface, int which) {
 
@@ -1064,6 +1088,7 @@ public class MainActivity extends AppCompatActivity
 														g.cancel(true);
 														gestion g4 = new gestion() ;
 														g4.execute(collection);
+														Toast.makeText(getApplicationContext(), "La reserva se a Guardado", Toast.LENGTH_LONG).show();
 
 
 
@@ -1087,7 +1112,7 @@ public class MainActivity extends AppCompatActivity
 
 
 											AlertDialog titulo=alertt.create();
-											titulo.setTitle("Datos del Usuario ");
+											titulo.setTitle("Datos del Usuario");
 											titulo.show();
 											conexion c=new conexion();
 											peliculag=peli;
@@ -1121,7 +1146,7 @@ public class MainActivity extends AppCompatActivity
 
 														alertt.setView(vie)
 															.setCancelable(false);
-														alertt.setNeutralButton("Salir2", new DialogInterface.OnClickListener() {
+														alertt.setNeutralButton("Salir", new DialogInterface.OnClickListener() {
 																@Override
 																public void onClick(DialogInterface dialogInterface, int which) {
 
@@ -1951,13 +1976,23 @@ public class MainActivity extends AppCompatActivity
 			holder.titulo.setText(vusa.get(position).getTitulo());
 			holder.formato.setText("Formato: "+vusa.get(position).getFormato());
 			holder.funcion.setText("Funcion\n "+vusa.get(position).getFuncion());
-			int n1=R.drawable.it2;
+			int n1=R.drawable.cargar;
 			if(vusa.get(position).getImagen().equals("it2")){
 			 n1=R.drawable.it2;
 			}
 			if(vusa.get(position).getImagen().equals("manosarmas")){
 				n1=R.drawable.manosarmas;
 			}
+			if(vusa.get(position).getImagen().equals("bill")){
+				n1=R.drawable.bill;
+			}
+			if(vusa.get(position).getImagen().equals("enola")){
+				n1=R.drawable.enola;
+			}
+			if(vusa.get(position).getImagen().equals("power")){
+				n1=R.drawable.power;
+			}
+			
 			holder.imagen.setBackgroundResource(n1);
 			holder.itemView.setTag(vusa.get(position));
 			holder.itemView.setOnClickListener(mOnClickListener);
@@ -2080,6 +2115,7 @@ public class MainActivity extends AppCompatActivity
 		
 		public void consultarsillas(MongoCollection<Document> collection){
 			String n="";
+			sii.clear();
 			try{   
 				
 				FindIterable<Document> findIterable = collection.find();  

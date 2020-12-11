@@ -74,6 +74,7 @@
 
 		<TextView
 			style="@style/headerText"
+			android:id="@+id/t1"
 			android:layout_gravity="center"
 			android:layout_marginTop="40dp"
 			android:text="Cine Calidad"
