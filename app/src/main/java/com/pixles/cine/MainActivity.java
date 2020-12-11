@@ -31,6 +31,9 @@ import android.widget.Toast;
 import android.widget.Button;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RadioGroup;
+import android.widget.CompoundButton;
 
 
 public class MainActivity extends AppCompatActivity
@@ -162,12 +165,12 @@ public class MainActivity extends AppCompatActivity
 																	EditText nomb= vie.findViewById(R.id.nombre);
 																	EditText tele= vie.findViewById(R.id.telefono);
 																	EditText email=vie.findViewById(R.id.email);
-																	conexion c = new conexion() ;
+																	
 																	cedulag=cc;
 																	nombreg=nomb.getText().toString();
 																	telefonog=tele.getText().toString();
 																	emailg=email.getText().toString();
-
+																	conexion c = new conexion() ;
 																	MongoDatabase database = c.mongo.getDatabase("cine");
 																	final MongoCollection<Document> collection = database.getCollection("usuarios");
 																	desci=1;
@@ -189,13 +192,21 @@ public class MainActivity extends AppCompatActivity
 																				//g3.execute(collection);
 																				EditText cedu1= vie.findViewById(R.id.cc);
 																				EditText silla=vie.findViewById(R.id.silla);
+																				
 																				cedulag=cedu1.getText().toString();
 																				peliculag=peli;
 																				silag=silla.getText().toString();
 																				diag=di;
 																				holag=hor;
 																				salag=sa;
-
+																				
+																				conexion c = new conexion() ;
+																				MongoDatabase database = c.mongo.getDatabase("cine");
+																				final MongoCollection<Document> collection = database.getCollection("reserva");
+																				desci=3;
+																				g.cancel(true);
+																				gestion g4 = new gestion() ;
+																				g4.execute(collection);
 
 
 
@@ -215,12 +226,776 @@ public class MainActivity extends AppCompatActivity
 
 
 																	AlertDialog titulo=alertt.create();
-																	titulo.setTitle("Datos del Usuario");
+																	titulo.setTitle("Datos del Usuario2");
 																	titulo.show();
 																	EditText cedu1= vie.findViewById(R.id.cc);
 																	EditText nomb1= vie.findViewById(R.id.nombre);
 																	EditText tele1= vie.findViewById(R.id.telefono);
 																	EditText email1=vie.findViewById(R.id.email);
+																	final EditText sill= vie.findViewById(R.id.silla);
+																	Button b1= vie.findViewById(R.id.b1);
+
+																	b1.setOnClickListener(new OnClickListener(){
+
+																			@Override
+																			public void onClick(View p1)
+																			{
+
+
+
+																				AlertDialog.Builder alertt= new AlertDialog.Builder(mParentActivity);
+
+																				final View vie = LayoutInflater.from(mParentActivity).inflate(R.layout.sillas, null);
+
+																				alertt.setView(vie)
+																					.setCancelable(false);
+																				alertt.setNeutralButton("Salir1", new DialogInterface.OnClickListener() {
+																						@Override
+																						public void onClick(DialogInterface dialogInterface, int which) {
+
+																						}
+																					});
+
+
+																				final AlertDialog titulo=alertt.create();
+																				titulo.setTitle("Sillas de la Sala: "+sa);
+																				titulo.show();
+																				final CheckBox A1=(CheckBox) vie.findViewById(R.id.A1);
+																				CheckBox A2= vie.findViewById(R.id.A2);
+																				CheckBox A3= vie.findViewById(R.id.A3);
+																				CheckBox A4= vie.findViewById(R.id.A4);
+																				CheckBox A5= vie.findViewById(R.id.A5);
+																				CheckBox A6= vie.findViewById(R.id.A6);
+																				CheckBox A7= vie.findViewById(R.id.A7);
+																				CheckBox B1= vie.findViewById(R.id.B1);
+																				CheckBox B2= vie.findViewById(R.id.B2);
+																				CheckBox B3= vie.findViewById(R.id.B3);
+																				CheckBox B4= vie.findViewById(R.id.B4);
+																				CheckBox B5= vie.findViewById(R.id.B5);
+																				CheckBox B6= vie.findViewById(R.id.B6);
+																				CheckBox B7= vie.findViewById(R.id.B7);
+																				CheckBox C1= vie.findViewById(R.id.C1);
+																				CheckBox C2= vie.findViewById(R.id.C2);
+																				CheckBox C3= vie.findViewById(R.id.C3);
+																				CheckBox C4= vie.findViewById(R.id.C4);
+																				CheckBox C5= vie.findViewById(R.id.C5);
+																				CheckBox C6= vie.findViewById(R.id.C6);
+																				CheckBox C7= vie.findViewById(R.id.C7);
+																				CheckBox D1= vie.findViewById(R.id.D1);
+																				CheckBox D2= vie.findViewById(R.id.D2);
+																				CheckBox D3= vie.findViewById(R.id.D3);
+																				CheckBox D4= vie.findViewById(R.id.D4);
+																				CheckBox D5= vie.findViewById(R.id.D5);
+																				CheckBox D6= vie.findViewById(R.id.D6);
+																				CheckBox D7= vie.findViewById(R.id.D7);
+																				CheckBox F1= vie.findViewById(R.id.F1);
+																				CheckBox F2= vie.findViewById(R.id.F2);
+																				CheckBox F3= vie.findViewById(R.id.F3);
+																				CheckBox F4= vie.findViewById(R.id.F4);
+																				CheckBox F5= vie.findViewById(R.id.F5);
+																				CheckBox F6= vie.findViewById(R.id.F6);
+																				CheckBox F7= vie.findViewById(R.id.F7);
+																				CheckBox G1= vie.findViewById(R.id.G1);
+																				CheckBox G2= vie.findViewById(R.id.G2);
+																				CheckBox G3= vie.findViewById(R.id.G3);
+																				CheckBox G4= vie.findViewById(R.id.G4);
+																				CheckBox G5= vie.findViewById(R.id.G5);
+																				CheckBox G6= vie.findViewById(R.id.G6);
+																				CheckBox G7= vie.findViewById(R.id.G7);
+
+																				A1.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("A1");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				A2.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("A2");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				A3.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("A3");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				A4.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("A4");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				A5.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("A5");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				A6.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("A6");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				A7.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("A7");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				B1.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("B1");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				B2.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("B2");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				B3.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("B3");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				B4.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("B4");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				B5.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("B5");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				B6.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("B6");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				B7.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("B7");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				C1.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("C1");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				C2.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("C2");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				C3.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("C3");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				C4.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("C4");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				C5.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("C5");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				C6.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("C6");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				C7.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("C7");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				D1.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("D1");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				D2.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("D2");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				D3.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("D3");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				D4.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("D4");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				D5.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("D5");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				D6.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("D6");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				D7.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("D7");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				F1.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("F1");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				F2.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("F2");
+																							titulo.cancel();
+																						}
+
+
+																					});
+
+																				F3.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("F3");
+																							titulo.cancel();
+																						}
+
+
+																					});
+
+																				F4.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("F4");
+																							titulo.cancel();
+																						}
+
+
+																					});
+
+																				F5.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("F5");
+																							titulo.cancel();
+																						}
+
+
+																					});
+
+																				F6.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("F6");
+																							titulo.cancel();
+																						}
+
+
+																					});
+
+																				F7.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("F7");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				G1.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("G1");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				G2.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("G2");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				G3.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("G3");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				G4.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("G4");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				G5.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("G5");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				G6.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("G6");
+																							titulo.cancel();
+																						}
+
+
+																					});
+																				G7.setOnClickListener(new OnClickListener(){
+
+																						@Override
+																						public void onClick(View p1)
+																						{
+																							A1.setChecked(true);
+																							sill.setText("G7");
+																							titulo.cancel();
+																						}
+
+
+																					});
+
+
+
+
+
+																				for(int i=0;i<sii.size();i++){
+																					//Toast.makeText(getApplicationContext(), ""+v[i], Toast.LENGTH_LONG).show();
+																					if(sii.get(i).getSilla().equals("A1")){
+																						A1.setChecked(true);
+																						A1.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("A2")){
+																						A2.setChecked(true);
+																						A2.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("A3")){
+																						A3.setChecked(true);
+																						A3.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("A4")){
+																						A4.setChecked(true);
+																						A4.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("A5")){
+																						A5.setChecked(true);
+																						A5.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("A6")){
+																						A6.setChecked(true);
+																						A6.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("A7")){
+																						A7.setChecked(true);
+																						A7.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("B1")){
+																						B1.setChecked(true);
+																						B1.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("B2")){
+																						B2.setChecked(true);
+																						B2.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("B3")){
+																						B3.setChecked(true);
+																						B3.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("B4")){
+																						B4.setChecked(true);
+																						B4.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("B5")){
+																						B5.setChecked(true);
+																						B5.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("B6")){
+																						B6.setChecked(true);
+																						B6.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("B7")){
+																						B7.setChecked(true);
+																						B7.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("C1")){
+																						C1.setChecked(true);
+																						C1.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("C2")){
+																						C2.setChecked(true);
+																						C2.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("C3")){
+																						C3.setChecked(true);
+																						C3.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("C4")){
+																						C4.setChecked(true);
+																						C4.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("C5")){
+																						C5.setChecked(true);
+																						C5.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("C6")){
+																						C6.setChecked(true);
+																						C6.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("C7")){
+																						C7.setChecked(true);
+																						C7.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("D1")){
+																						D1.setChecked(true);
+																						D1.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("D2")){
+																						D2.setChecked(true);
+																						D2.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("D3")){
+																						D3.setChecked(true);
+																						D3.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("D4")){
+																						D4.setChecked(true);
+																						D4.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("D5")){
+																						D5.setChecked(true);
+																						D5.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("D6")){
+																						D6.setChecked(true);
+																						D6.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("D7")){
+																						D7.setChecked(true);
+																						D7.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("F1")){
+																						F1.setChecked(true);
+																						F1.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("F2")){
+																						F2.setChecked(true);
+																						F2.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("F3")){
+																						F3.setChecked(true);
+																						F3.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("F4")){
+																						F4.setChecked(true);
+																						F4.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("F5")){
+																						F5.setChecked(true);
+																						F5.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("F6")){
+																						F6.setChecked(true);
+																						F6.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("F7")){
+																						F7.setChecked(true);
+																						F7.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("G1")){
+																						G1.setChecked(true);
+																						G1.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("G2")){
+																						G2.setChecked(true);
+																						G2.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("G3")){
+																						G3.setChecked(true);
+																						G3.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("G4")){
+																						G4.setChecked(true);
+																						G4.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("G5")){
+																						G5.setChecked(true);
+																						G5.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("G6")){
+																						G6.setChecked(true);
+																						G6.setEnabled(false);
+																					}
+																					if(sii.get(i).getSilla().equals("G7")){
+																						G7.setChecked(true);
+																						G7.setEnabled(false);
+																					}
+																				}
+
+
+
+
+																			}
+
+
+																		});
 																	cedu1.setText(""+cedulag);
 																	nomb1.setText(""+nombreg);
 																	tele1.setText(""+telefonog);
@@ -281,6 +1056,14 @@ public class MainActivity extends AppCompatActivity
 														diag=di;
 														holag=hor;
 														salag=sa;
+														
+														conexion c = new conexion() ;
+														MongoDatabase database = c.mongo.getDatabase("cine");
+														final MongoCollection<Document> collection = database.getCollection("reserva");
+														desci=3;
+														g.cancel(true);
+														gestion g4 = new gestion() ;
+														g4.execute(collection);
 
 
 
@@ -293,13 +1076,18 @@ public class MainActivity extends AppCompatActivity
 											alertt.setNeutralButton("Salir", new DialogInterface.OnClickListener() {
 													@Override
 													public void onClick(DialogInterface dialogInterface, int which) {
-
+														conexion c=new conexion();
+														MongoDatabase database = c.mongo.getDatabase("cine");
+														final MongoCollection<Document> collection = database.getCollection("usuarios");
+														desci=0;
+														gestion g3 = new gestion() ;
+														g3.execute(collection);
 													}
 												});
 
 
 											AlertDialog titulo=alertt.create();
-											titulo.setTitle("Datos del Usuario");
+											titulo.setTitle("Datos del Usuario ");
 											titulo.show();
 											conexion c=new conexion();
 											peliculag=peli;
@@ -316,6 +1104,7 @@ public class MainActivity extends AppCompatActivity
 											EditText nomb= vie.findViewById(R.id.nombre);
 											EditText tele= vie.findViewById(R.id.telefono);
 											EditText email=vie.findViewById(R.id.email);
+											final EditText sill= vie.findViewById(R.id.silla);
 											Button b1= vie.findViewById(R.id.b1);
 
 											b1.setOnClickListener(new OnClickListener(){
@@ -331,20 +1120,8 @@ public class MainActivity extends AppCompatActivity
 														final View vie = LayoutInflater.from(mParentActivity).inflate(R.layout.sillas, null);
 
 														alertt.setView(vie)
-															.setCancelable(false)
-															.setPositiveButton("seleccionar", new DialogInterface.OnClickListener(){
-																@Override
-																public void onClick(DialogInterface dialog,int which){
-
-
-
-
-
-
-
-																}		
-															});
-														alertt.setNeutralButton("Salir", new DialogInterface.OnClickListener() {
+															.setCancelable(false);
+														alertt.setNeutralButton("Salir2", new DialogInterface.OnClickListener() {
 																@Override
 																public void onClick(DialogInterface dialogInterface, int which) {
 
@@ -352,10 +1129,10 @@ public class MainActivity extends AppCompatActivity
 															});
 
 
-														AlertDialog titulo=alertt.create();
+														final AlertDialog titulo=alertt.create();
 														titulo.setTitle("Sillas de la Sala: "+sa);
 														titulo.show();
-														CheckBox A1= vie.findViewById(R.id.A1);
+														final CheckBox A1=(CheckBox) vie.findViewById(R.id.A1);
 														CheckBox A2= vie.findViewById(R.id.A2);
 														CheckBox A3= vie.findViewById(R.id.A3);
 														CheckBox A4= vie.findViewById(R.id.A4);
@@ -363,6 +1140,554 @@ public class MainActivity extends AppCompatActivity
 														CheckBox A6= vie.findViewById(R.id.A6);
 														CheckBox A7= vie.findViewById(R.id.A7);
 														CheckBox B1= vie.findViewById(R.id.B1);
+														CheckBox B2= vie.findViewById(R.id.B2);
+														CheckBox B3= vie.findViewById(R.id.B3);
+														CheckBox B4= vie.findViewById(R.id.B4);
+														CheckBox B5= vie.findViewById(R.id.B5);
+														CheckBox B6= vie.findViewById(R.id.B6);
+														CheckBox B7= vie.findViewById(R.id.B7);
+														CheckBox C1= vie.findViewById(R.id.C1);
+														CheckBox C2= vie.findViewById(R.id.C2);
+														CheckBox C3= vie.findViewById(R.id.C3);
+														CheckBox C4= vie.findViewById(R.id.C4);
+														CheckBox C5= vie.findViewById(R.id.C5);
+														CheckBox C6= vie.findViewById(R.id.C6);
+														CheckBox C7= vie.findViewById(R.id.C7);
+														CheckBox D1= vie.findViewById(R.id.D1);
+														CheckBox D2= vie.findViewById(R.id.D2);
+														CheckBox D3= vie.findViewById(R.id.D3);
+														CheckBox D4= vie.findViewById(R.id.D4);
+														CheckBox D5= vie.findViewById(R.id.D5);
+														CheckBox D6= vie.findViewById(R.id.D6);
+														CheckBox D7= vie.findViewById(R.id.D7);
+														CheckBox F1= vie.findViewById(R.id.F1);
+														CheckBox F2= vie.findViewById(R.id.F2);
+														CheckBox F3= vie.findViewById(R.id.F3);
+														CheckBox F4= vie.findViewById(R.id.F4);
+														CheckBox F5= vie.findViewById(R.id.F5);
+														CheckBox F6= vie.findViewById(R.id.F6);
+														CheckBox F7= vie.findViewById(R.id.F7);
+														CheckBox G1= vie.findViewById(R.id.G1);
+														CheckBox G2= vie.findViewById(R.id.G2);
+														CheckBox G3= vie.findViewById(R.id.G3);
+														CheckBox G4= vie.findViewById(R.id.G4);
+														CheckBox G5= vie.findViewById(R.id.G5);
+														CheckBox G6= vie.findViewById(R.id.G6);
+														CheckBox G7= vie.findViewById(R.id.G7);
+														
+														A1.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("A1");
+																	titulo.cancel();
+																}
+																
+															
+														});
+														A2.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("A2");
+																	titulo.cancel();
+																}
+
+
+															});
+														A3.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("A3");
+																	titulo.cancel();
+																}
+
+
+															});
+														A4.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("A4");
+																	titulo.cancel();
+																}
+
+
+															});
+														A5.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("A5");
+																	titulo.cancel();
+																}
+
+
+															});
+														A6.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("A6");
+																	titulo.cancel();
+																}
+
+
+															});
+														A7.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("A7");
+																	titulo.cancel();
+																}
+
+
+															});
+														B1.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("B1");
+																	titulo.cancel();
+																}
+
+
+															});
+														B2.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("B2");
+																	titulo.cancel();
+																}
+
+
+															});
+														B3.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("B3");
+																	titulo.cancel();
+																}
+
+
+															});
+														B4.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("B4");
+																	titulo.cancel();
+																}
+
+
+															});
+														B5.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("B5");
+																	titulo.cancel();
+																}
+
+
+															});
+														B6.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("B6");
+																	titulo.cancel();
+																}
+
+
+															});
+														B7.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("B7");
+																	titulo.cancel();
+																}
+
+
+															});
+														C1.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("C1");
+																	titulo.cancel();
+																}
+
+
+															});
+														C2.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("C2");
+																	titulo.cancel();
+																}
+
+
+															});
+														C3.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("C3");
+																	titulo.cancel();
+																}
+
+
+															});
+														C4.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("C4");
+																	titulo.cancel();
+																}
+
+
+															});
+														C5.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("C5");
+																	titulo.cancel();
+																}
+
+
+															});
+														C6.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("C6");
+																	titulo.cancel();
+																}
+
+
+															});
+														C7.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("C7");
+																	titulo.cancel();
+																}
+
+
+															});
+														D1.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("D1");
+																	titulo.cancel();
+																}
+
+
+															});
+														D2.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("D2");
+																	titulo.cancel();
+																}
+
+
+															});
+														D3.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("D3");
+																	titulo.cancel();
+																}
+
+
+															});
+														D4.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("D4");
+																	titulo.cancel();
+																}
+
+
+															});
+														D5.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("D5");
+																	titulo.cancel();
+																}
+
+
+															});
+														D6.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("D6");
+																	titulo.cancel();
+																}
+
+
+															});
+														D7.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("D7");
+																	titulo.cancel();
+																}
+
+
+															});
+														F1.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("F1");
+																	titulo.cancel();
+																}
+
+
+															});
+														F2.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("F2");
+																	titulo.cancel();
+																}
+
+
+															});
+														
+														F3.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("F3");
+																	titulo.cancel();
+																}
+
+
+															});
+														
+														F4.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("F4");
+																	titulo.cancel();
+																}
+
+
+															});
+														
+														F5.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("F5");
+																	titulo.cancel();
+																}
+
+
+															});
+														
+														F6.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("F6");
+																	titulo.cancel();
+																}
+
+
+															});
+														
+														F7.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("F7");
+																	titulo.cancel();
+																}
+
+
+															});
+														G1.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("G1");
+																	titulo.cancel();
+																}
+
+
+															});
+														G2.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("G2");
+																	titulo.cancel();
+																}
+
+
+															});
+														G3.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("G3");
+																	titulo.cancel();
+																}
+
+
+															});
+														G4.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("G4");
+																	titulo.cancel();
+																}
+
+
+															});
+														G5.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("G5");
+																	titulo.cancel();
+																}
+
+
+															});
+														G6.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("G6");
+																	titulo.cancel();
+																}
+
+
+															});
+														G7.setOnClickListener(new OnClickListener(){
+
+																@Override
+																public void onClick(View p1)
+																{
+																	A1.setChecked(true);
+																	sill.setText("G7");
+																	titulo.cancel();
+																}
+
+
+															});
+														
+
+														
+														
 														
 														for(int i=0;i<sii.size();i++){
 															//Toast.makeText(getApplicationContext(), ""+v[i], Toast.LENGTH_LONG).show();
@@ -377,6 +1702,162 @@ public class MainActivity extends AppCompatActivity
 															if(sii.get(i).getSilla().equals("A3")){
 																A3.setChecked(true);
 																A3.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("A4")){
+																A4.setChecked(true);
+																A4.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("A5")){
+																A5.setChecked(true);
+																A5.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("A6")){
+																A6.setChecked(true);
+																A6.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("A7")){
+																A7.setChecked(true);
+																A7.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("B1")){
+																B1.setChecked(true);
+																B1.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("B2")){
+																B2.setChecked(true);
+																B2.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("B3")){
+																B3.setChecked(true);
+																B3.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("B4")){
+																B4.setChecked(true);
+																B4.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("B5")){
+																B5.setChecked(true);
+																B5.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("B6")){
+																B6.setChecked(true);
+																B6.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("B7")){
+																B7.setChecked(true);
+																B7.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("C1")){
+																C1.setChecked(true);
+																C1.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("C2")){
+																C2.setChecked(true);
+																C2.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("C3")){
+																C3.setChecked(true);
+																C3.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("C4")){
+																C4.setChecked(true);
+																C4.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("C5")){
+																C5.setChecked(true);
+																C5.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("C6")){
+																C6.setChecked(true);
+																C6.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("C7")){
+																C7.setChecked(true);
+																C7.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("D1")){
+																D1.setChecked(true);
+																D1.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("D2")){
+																D2.setChecked(true);
+																D2.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("D3")){
+																D3.setChecked(true);
+																D3.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("D4")){
+																D4.setChecked(true);
+																D4.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("D5")){
+																D5.setChecked(true);
+																D5.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("D6")){
+																D6.setChecked(true);
+																D6.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("D7")){
+																D7.setChecked(true);
+																D7.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("F1")){
+																F1.setChecked(true);
+																F1.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("F2")){
+																F2.setChecked(true);
+																F2.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("F3")){
+																F3.setChecked(true);
+																F3.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("F4")){
+																F4.setChecked(true);
+																F4.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("F5")){
+																F5.setChecked(true);
+																F5.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("F6")){
+																F6.setChecked(true);
+																F6.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("F7")){
+																F7.setChecked(true);
+																F7.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("G1")){
+																G1.setChecked(true);
+																G1.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("G2")){
+																G2.setChecked(true);
+																G2.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("G3")){
+																G3.setChecked(true);
+																G3.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("G4")){
+																G4.setChecked(true);
+																G4.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("G5")){
+																G5.setChecked(true);
+																G5.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("G6")){
+																G6.setChecked(true);
+																G6.setEnabled(false);
+															}
+															if(sii.get(i).getSilla().equals("G7")){
+																G7.setChecked(true);
+																G7.setEnabled(false);
 															}
 														}
 														
@@ -518,6 +1999,9 @@ public class MainActivity extends AppCompatActivity
 			}
 			if(desci==2){
 				consultarsillas(voids[0]);
+			}
+			if(desci==3){
+				insertarreserva(voids[0]);
 			}
 			
 			
