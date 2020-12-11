@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Safe Training</string>
+    <string name="app_name">Cine</string>
     <string name="title_usuario_list">usuarios</string>
     <string name="title_usuario_detail">usuario Detail</string>
     <string name="title_administrador_list">administradores</string>

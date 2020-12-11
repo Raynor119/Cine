@@ -1,0 +1,54 @@
+db.createCollection("cartelera")
+db.cartelera.insert([
+    {
+        "titulo": "It Capitulo 2",
+        "genero": "Terror",
+        "clasificacion": "B15",
+        "formato": "21:9",
+        "imagen": "it2",
+        "resumen": "En el misterioso pueblo de Derry, un malvado payaso llamado Pennywise vuelve 27 años después para atormentar a los ya adultos miembros del Club de los Perdedores, que ahora están más alejados unos de otros.",
+        "Protagonistas": "Jessica Chastain,Bill Hader,James McAvoy,Bill Skarsgard",
+        "director": "Andrés Muschietti",
+        "funciones":{
+            "dia": "12/12/2020",
+            "hora": "23:00",
+            "sala": "A1"
+        }
+
+    },
+		{
+        "titulo": "Manos a las Armas",
+        "genero": "Comedia",
+        "clasificacion": "B15",
+        "formato": "21:9",
+        "imagen": "manosarmas",
+        "resumen": "Miles lleva una vida tranquila y común hasta que se ve forzado por una pandilla a participar en una letal competición dentro de su ciudad para salvar a su ex novia. Miles siempre tuvo mucho ingenio para evitar sus problemas, pero ahora debe enfrentar sus miedos y luchar por la mujer que ama.",
+        "Protagonistas": "Samara Weaving,Daniel Radcliffe",
+        "director": "Jason Lei Howden",
+        "funciones":{
+            "dia": "13/12/2020",
+            "hora": "12:00",
+            "sala": "A2"
+        }
+
+    },
+
+])
+db.createCollection("usuarios")
+db.usuarios.insert({
+		"cedula": "1005035317",
+		"nombre": "Deivy Camilo Florez Prieto",
+		"telefono": "3152793799",
+		"email": "saibod@hotmail.es"
+})
+db.createCollection("reserva")
+db.reserva.insert({
+		"cedula": "1005035317",
+		"pelicula": "It Capitulo 2",
+		"silla": "A1",
+		"funcion":{
+				"dia": "13/12/2020",
+				"hora": "12:00",
+				"sala": "A2"
+				}
+		})
