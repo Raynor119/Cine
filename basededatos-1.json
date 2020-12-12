@@ -127,17 +127,4 @@ db.usuarios.insert({
 		"email": "saibod@hotmail.es"
 })
 db.createCollection("reserva")
-db.reserva.insert({
-				"cedula" : "12344556",
-        "pelicula" : "It Capitulo 2",
-        "sillas" : {
-				      "silla1": "D4",
-				      "silla2": "A2"
-		},
-        "funcion" : {
-				            "nombre": "funcion1",
-                "dia" : "12/12/2020",
-                "hora" : "23:00",
-                "sala" : "A1"
-        }
-})
+

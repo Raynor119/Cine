@@ -35,6 +35,7 @@ public class reservas extends AppCompatActivity
 	int desci=0;
 	gestion g;
 	String idg="";
+	String cedu="";
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState)
@@ -43,6 +44,8 @@ public class reservas extends AppCompatActivity
         setContentView(R.layout.reserva);
 		recyclerView1 =(RecyclerView) findViewById(R.id.listru);
 		assert recyclerView1 != null;
+		Bundle extra = getIntent().getExtras();				
+		cedu=extra.getString("cc");
 		//reclicle();
 		conexion c = new conexion() ;
 
@@ -54,6 +57,13 @@ public class reservas extends AppCompatActivity
 		g.execute(collection);
 	}
 	public void reclicle(){
+		for(int x=0;x<vs.size();x++){
+			if(vs.get(x).getCedula().equals(cedu)){
+				
+			}else{
+				vs.remove(x);
+			}
+		}
 		recyclerView1.setAdapter(new SimpleItemRecyclerViewAdapter(reservas.this, vs));
 		animacion(recyclerView1);
 	}
@@ -215,13 +225,19 @@ public class reservas extends AppCompatActivity
 
 					//System.out.println(mongoCursor.next());  
 				}  
+				String si="";
 				for(int i=0;i<db.getCollection("reserva").find().toArray().size();i++){
 
 					List<BasicDBObject> nnn= (List<BasicDBObject>) db.getCollection("reserva").find().toArray();
 					n=nnn+"";
 					JSONObject json= new JSONObject(nnn.get(i).get("funcion")+"");
 					n=""+"Dia: "+json.getString("dia")+"\n Hora: "+json.getString("hora")+"\n Sala: "+json.getString("sala");
-					vs.add(new rese(""+nnn.get(i).get("_id"),""+nnn.get(i).get("cedula"),""+nnn.get(i).get("pelicula"),""+nnn.get(i).get("silla"),n));
+					JSONObject j=new JSONObject(nnn.get(i).get("sillas")+"");
+					for(int x=0;x<j.length();x++){
+						si=si+j.getString("silla"+(x+1))+", ";
+					}
+					vs.add(new rese(""+nnn.get(i).get("_id"),""+nnn.get(i).get("cedula"),""+nnn.get(i).get("pelicula"),si,n));
+					si="";
 				}
 				List<BasicDBObject> nnn= (List<BasicDBObject>) db.getCollection("reserva").find().toArray();
 				n=nnn+"";
