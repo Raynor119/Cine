@@ -1,3 +1,4 @@
+use cine
 db.createCollection("cartelera")
 db.cartelera.insert([
     {
@@ -10,9 +11,17 @@ db.cartelera.insert([
         "Protagonistas": "Jessica Chastain,Bill Hader,James McAvoy,Bill Skarsgard",
         "director": "Andrés Muschietti",
         "funciones":{
-            "dia": "12/12/2020",
-            "hora": "23:00",
-            "sala": "A1"
+            "funcion1": {
+							"dia": "12/12/2020",
+            	"hora": "23:00",
+            	"sala": "A1"
+						},
+						"funcion2":{
+						"dia": "12/12/2020",
+						"hora": "12:00",
+						"sala": "A1"
+						},
+						
         }
 
     },
@@ -26,9 +35,11 @@ db.cartelera.insert([
         "Protagonistas": "Samara Weaving,Daniel Radcliffe",
         "director": "Jason Lei Howden",
         "funciones":{
-            "dia": "13/12/2020",
-            "hora": "12:00",
-            "sala": "A2"
+            "funcion1":{
+							"dia": "13/12/2020",
+            	"hora": "12:00",
+            	"sala": "A2"
+						}
         }
 
     },
@@ -42,9 +53,16 @@ db.cartelera.insert([
 				"Protagonistas": "Keanu Reeves,Alex Winter",
         "director": "Dean Parisot",
         "funciones":{
-            "dia": "20/12/2020",
+            "funcion1":{
+						"dia": "20/12/2020",
             "hora": "13:00",
             "sala": "A4"
+						},
+						"funcion2":{
+						"dia": "20/12/2020",
+            "hora": "09:00",
+            "sala": "A4"
+						},
         }
 
     },
@@ -58,9 +76,16 @@ db.cartelera.insert([
 				"Protagonistas": "Millie Bobby,Henry Cavill,Helena Bonham",
         "director": "Harry Bradbeer",
         "funciones":{
-            "dia": "24/12/2020",
-            "hora": "16:00",
-            "sala": "B1"
+            "funcion1":{
+								"dia": "24/12/2020",
+						"hora": "16:00",
+						"sala": "B1"
+						},
+						"funcion2":{
+								"dia": "24/12/2020",
+						"hora": "09:00",
+						"sala": "B1"
+						}
         }
 
     },
@@ -74,9 +99,21 @@ db.cartelera.insert([
 				"Protagonistas": "Jaime Fozz,Joseph Gordon,Dominique Fishback",
         "director": "Henry Joost,Ariel Schulman",
         "funciones":{
-            "dia": "29/12/2020",
-            "hora": "09:00",
-            "sala": "A1"
+            "funcion1" : {
+								"dia": "29/12/2020",
+						"hora": "09:00",
+						"sala": "A1"
+						},
+						"funcion2" : {
+								"dia": "29/12/2020",
+						"hora": "13:00",
+						"sala": "A1"
+						},
+						"funcion3" : {
+								"dia": "29/12/2020",
+						"hora": "18:00",
+						"sala": "A1"
+						}
         }
 
     }
@@ -90,3 +127,17 @@ db.usuarios.insert({
 		"email": "saibod@hotmail.es"
 })
 db.createCollection("reserva")
+db.reserva.insert({
+				"cedula" : "12344556",
+        "pelicula" : "It Capitulo 2",
+        "sillas" : {
+				      "silla1": "D4",
+				      "silla2": "A2"
+		},
+        "funcion" : {
+				            "nombre": "funcion1",
+                "dia" : "12/12/2020",
+                "hora" : "23:00",
+                "sala" : "A1"
+        }
+})

@@ -35,6 +35,8 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.RadioGroup;
 import android.widget.CompoundButton;
 import android.content.Intent;
+import org.json.JSONArray;
+import org.json.JSONException;
 
 
 public class MainActivity extends AppCompatActivity
@@ -114,14 +116,14 @@ public class MainActivity extends AppCompatActivity
 			@Override public void onClick(View view) {
 				final String id;
 				final String peli;
-				final String di;
-				final String hor;
-				final String sa;
+				final String di="";
+				final String hor="";
+				final String sa="";
 				id=vusa.get(recyclerView1.getChildAdapterPosition(view)).getId();
 				peli=vusa.get(recyclerView1.getChildAdapterPosition(view)).getTitulo();
-				di=fun.get(recyclerView1.getChildAdapterPosition(view)).getDia();
-				hor=fun.get(recyclerView1.getChildAdapterPosition(view)).getHora();
-				sa=fun.get(recyclerView1.getChildAdapterPosition(view)).getSala();
+				//di=fun.get(recyclerView1.getChildAdapterPosition(view)).getDia();
+				//hor=fun.get(recyclerView1.getChildAdapterPosition(view)).getHora();
+				//sa=fun.get(recyclerView1.getChildAdapterPosition(view)).getSala();
 				AlertDialog.Builder alertt= new AlertDialog.Builder(mParentActivity);
 				//alertt.setMessage("El Usuario ya se habia Registrado")
 				final View vie = LayoutInflater.from(mParentActivity).inflate(R.layout.peliculad, null);
@@ -1975,7 +1977,7 @@ public class MainActivity extends AppCompatActivity
 		public void onBindViewHolder(final ViewHolder holder, int position) {
 			holder.titulo.setText(vusa.get(position).getTitulo());
 			holder.formato.setText("Formato: "+vusa.get(position).getFormato());
-			holder.funcion.setText("Funcion\n "+vusa.get(position).getFuncion());
+			holder.funcion.setText("Funciones \n "+vusa.get(position).getFuncion());
 			int n1=R.drawable.cargar;
 			if(vusa.get(position).getImagen().equals("it2")){
 			 n1=R.drawable.it2;
@@ -2070,6 +2072,7 @@ public class MainActivity extends AppCompatActivity
 		public void consultarDocumentos(MongoCollection<Document> collection){
 			String n="";
 			try{   
+				n="entro00";
 				ll.clear();
 				vs.clear();
 				usu.clear();
@@ -2081,17 +2084,32 @@ public class MainActivity extends AppCompatActivity
 				while(mongoCursor.hasNext()){  
 				
 					n= n+mongoCursor.next();
-					
+					n="entro000";
 					
 					//System.out.println(mongoCursor.next());  
 				}  
+				List<BasicDBObject> nnn1= (List<BasicDBObject>) db.getCollection("cartelera").find().toArray();
+				n="entro :"+""+nnn1;
 				for(int i=0;i<db.getCollection("cartelera").find().toArray().size();i++){
-					
+
 					List<BasicDBObject> nnn= (List<BasicDBObject>) db.getCollection("cartelera").find().toArray();
-					
+
 					JSONObject json= new JSONObject(nnn.get(i).get("funciones")+"");
-					n=""+"Dia: "+json.getString("dia")+"\n Hora: "+json.getString("hora")+"\n Sala: "+json.getString("sala");
-					fun.add(new funcion(json.getString("dia"),json.getString("hora"),json.getString("sala")));
+					n="entro0"+json;
+					JSONObject jo=null;
+					JSONObject jo1=null;
+					n="";
+					for(int b=0;b<json.length();b++){
+						//n=""+json.getString("funcion"+(b+1));
+						JSONObject j= new JSONObject(""+json.getString("funcion"+(b+1)));
+						n=n+"funcion "+(b+1)+"\n   Dia: "+j.getString("dia")+"\n   Hora: "+j.getString("hora")+"\n   Sala: "+j.getString("sala")+"\n ";
+		
+						
+					}
+
+
+					//n=""+"Dia: "+json.getString("dia")+"\n Hora: "+json.getString("hora")+"\n Sala: "+json.getString("sala");
+					//fun.add(new funcion(json.getString("dia"),json.getString("hora"),json.getString("sala")));
 					ll.add(new detalles(""+nnn.get(i).get("_id"),""+nnn.get(i).get("titulo"),""+nnn.get(i).get("genero"),""+nnn.get(i).get("clasificacion"),""+nnn.get(i).get("formato"),""+nnn.get(i).get("resumen"),""+nnn.get(i).get("Protagonistas"),""+nnn.get(i).get("director"),n));
 					vs.add(new cartelera(""+nnn.get(i).get("_id")+"",""+nnn.get(i).get("titulo"),""+nnn.get(i).get("formato"),n,""+nnn.get(i).get("imagen")));
 				}
@@ -2107,7 +2125,7 @@ public class MainActivity extends AppCompatActivity
 			}catch(Exception e){
 				System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 				//return "";
-				n=e.getClass().getName() + ": " + e.getMessage()+"";
+				n="error 2: "+e.getClass().getName() + ": " + e.getMessage()+"";
 			}
 
 			publishProgress(n);
