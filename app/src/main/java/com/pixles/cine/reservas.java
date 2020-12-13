@@ -32,6 +32,7 @@ public class reservas extends AppCompatActivity
 {
 	RecyclerView recyclerView1;
 	public List<rese> vs = new ArrayList<>();
+	public List<rese> vs1 = new ArrayList<>();
 	int desci=0;
 	gestion g;
 	String idg="";
@@ -52,19 +53,31 @@ public class reservas extends AppCompatActivity
 		MongoDatabase database = c.mongo.getDatabase("cine");
 
 		MongoCollection<Document> collection = database.getCollection("cartelera"); 
-
+		vs.clear();
 		g = new gestion() ;
 		g.execute(collection);
 	}
 	public void reclicle(){
+		//Toast.makeText(getApplicationContext(), ""+cedu, Toast.LENGTH_LONG).show();
+		
 		for(int x=0;x<vs.size();x++){
+			String gg=vs.get(x).getCedula();
+			String g1=cedu;
 			if(vs.get(x).getCedula().equals(cedu)){
-				
+				vs1.add(new rese(vs.get(x).getId(),vs.get(x).getCedula(),vs.get(x).getPelicula(),vs.get(x).getSilla(),vs.get(x).getFuncion()));
 			}else{
-				vs.remove(x);
+				
 			}
 		}
-		recyclerView1.setAdapter(new SimpleItemRecyclerViewAdapter(reservas.this, vs));
+		int dd=vs.size();
+		String gg=vs.get(vs.size()-1).getCedula();
+		String g1=cedu;
+		if(vs.get(vs.size()-1).getCedula().equals(cedu)){
+			//vs1.add(new rese(vs.get(vs.size()-1).getId(),vs.get(vs.size()-1).getCedula(),vs.get(vs.size()-1).getPelicula(),vs.get(vs.size()-1).getSilla(),vs.get(vs.size()-1).getFuncion()));
+		}else{
+			vs.remove(vs.size()-1);
+		}
+		recyclerView1.setAdapter(new SimpleItemRecyclerViewAdapter(reservas.this, vs1));
 		animacion(recyclerView1);
 	}
 	private void animacion(RecyclerView recyclerView){		
@@ -92,7 +105,7 @@ public class reservas extends AppCompatActivity
 						@Override
 						public void onClick(DialogInterface dialog,int which){
 							idg=id;
-							//Toast.makeText(getApplicationContext(), ""+idg, Toast.LENGTH_LONG).show();
+							
 							conexion c = new conexion() ;
 
 							MongoDatabase database = c.mongo.getDatabase("cine");

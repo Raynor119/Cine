@@ -1131,8 +1131,7 @@ public class MainActivity extends AppCompatActivity
 
 					JSONObject json= new JSONObject(nnn.get(i).get("funciones")+"");
 					n="entro0"+json;
-					JSONObject jo=null;
-					JSONObject jo1=null;
+					
 					n="";
 					for(int b=0;b<json.length();b++){
 						//n=""+json.getString("funcion"+(b+1));
